@@ -22,6 +22,25 @@
     array_uintersect_uassoc() - Computes the intersection of arrays with additional index check, compares data and indexes by separate callback functions
     */
 
+    echo "array unpacking... \n";
+    $arrayA = ['a' => 1];
+    $arrayB = ['b' => 2];
+    $result = ['a' => 0, ...$arrayA, ...$arrayB];
+    var_dump($result);
+
+    echo "array_is_list(array \$array): bool \n";
+    var_dump(array_is_list([])); // true
+    var_dump(array_is_list(['apple', 2, 3])); // true
+    var_dump(array_is_list([0 => 'apple', 'orange'])); // true
+    // The array does not start at 0
+    var_dump(array_is_list([1 => 'apple', 'orange'])); // false
+    // The keys are not in the correct order
+    var_dump(array_is_list([1 => 'apple', 0 => 'orange'])); // false
+    // Non-integer keys
+    var_dump(array_is_list([0 => 'apple', 'foo' => 'bar'])); // false
+    // Non-consecutive keys
+    var_dump(array_is_list([0 => 'apple', 2 => 'bar'])); // false
+
     echo "array_diff(array \$array, array ...\$arrays): array \n";
     $array1 = array("a" => "green", "red", "blue", "red");
     $array2 = array("b" => "green", "yellow", "red");
@@ -70,9 +89,7 @@
     var_dump(array_diff_ukey($array1, $array2, 'key_compare_func2'));
 
     echo "\narray_udiff(array \$array, array ...\$arrays, callable \$value_compare_func): array \n";
-
     echo "\narray_udiff_assoc(array \$array, array ...\$arrays, callable \$value_compare_func): array \n";
-
     echo "\narray_udiff_uassoc(array \$array, array ...\$arrays, callable \$value_compare_func, callable \$key_compare_func): array \n";
 
 ?>
